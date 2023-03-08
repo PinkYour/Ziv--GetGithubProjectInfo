@@ -4,7 +4,6 @@ import { Descriptions, Pagination } from 'antd';
 import Link from 'antd/es/typography/Link';
 import './index.scss'
 
-
 const Content: React.FC = () => {
     const [data, setData] = useState([])
     const [pageData, setPageData] = useState([])
@@ -35,6 +34,7 @@ const Content: React.FC = () => {
         let end:number=page*4;
         setPageData(data.slice(start,end))
     }
+    
     return (
 
         <div className='Content'>
@@ -43,7 +43,7 @@ const Content: React.FC = () => {
                 pageData.map((item, index) => {
 
                     return <div key={index}>
-                        <Link href='/' target='_blank'>
+                        <Link href={`/Detail/${item['id']}`} target='_blank'>
                             <Descriptions title={"仓库(" + item['id'] + ')：' + item['name']} className='Item'>
                                 <Descriptions.Item label="Full_name(全称)">{item['full_name']}</Descriptions.Item>
                                 <Descriptions.Item label="Created_at">{item['created_at']}</Descriptions.Item>
