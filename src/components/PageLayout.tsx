@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Descriptions, Pagination } from 'antd';
 import Link from 'antd/es/typography/Link';
-import './index.scss'
 
 
-const Content: React.FC = () => {
+
+const PageLayout: React.FC = () => {
     const [data, setData] = useState([])
     const [pageData, setPageData] = useState([])
     const [currentPage, setCurrentPage] = useState(1)
@@ -37,7 +37,7 @@ const Content: React.FC = () => {
     }
     return (
 
-        <div className='Content'>
+        <div className=''>
 
             {
                 pageData.map((item, index) => {
@@ -67,4 +67,4 @@ const Content: React.FC = () => {
     )
 };
 
-export default Content;
+export default PageLayout;
