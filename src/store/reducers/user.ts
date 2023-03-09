@@ -10,8 +10,6 @@ const initUserState = {
         id: 0,
         name: 'user'
     }
-        
-  
 }
 export enum IUserActionTypes{
     INIT,

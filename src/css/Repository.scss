@@ -1,0 +1,29 @@
+.Repository {
+    width: 90%;
+    margin: 5px auto 0;
+    .dir {
+        color: rgb(62, 171, 171);
+        th:hover{
+    
+            background-color: #d4cdcd;
+        }
+    }
+   
+    table {
+        // border: 1px solid black;
+        tbody {
+            tr {
+                th {
+                    text-align: left;
+                    width: 250px;
+                    display: inline-block;
+                    overflow-x: hidden;
+                    text-overflow: ellipsis;
+                }
+                td{
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+}

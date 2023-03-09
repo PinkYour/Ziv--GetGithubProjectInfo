@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Descriptions, Pagination } from 'antd';
+import { Descriptions, Pagination, } from 'antd';
+// import { Space, Table, Tag} from 'antd'
 import Link from 'antd/es/typography/Link';
 import './index.scss'
 
@@ -37,7 +38,7 @@ const Content: React.FC = () => {
             {
                 pageData.map((item, index) => {
                     return <div key={index}>
-                        <Link href={`/Detail/${item['name']}`} >
+                        <Link href={`/Repository/${item['name']}`} >
                             <Descriptions title={"仓库(" + item['id'] + ')：' + item['name']} className='Item'>
                                 <Descriptions.Item label="Full_name(全称)">{item['full_name']}</Descriptions.Item>
                                 <Descriptions.Item label="Created_at">{item['created_at']}</Descriptions.Item>
@@ -48,6 +49,8 @@ const Content: React.FC = () => {
                     </div>
                 })
             }
+              {/* <Table columns={columns} dataSource={data1} />; */}
+
             <Pagination
                 showSizeChanger
                 current={currentPage}
@@ -61,4 +64,5 @@ const Content: React.FC = () => {
     )
 };
 
-export default Content;
+
+  export default Content

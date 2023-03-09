@@ -4,7 +4,8 @@ import Header from './layout/Header'
 import SiderBar from './layout/SiderBar'
 import Content from './layout/Content'
 import { BrowserRouter,Route,Routes } from 'react-router-dom'
-import Details from './components/Details'
+import Repository from './components/Repository'
+import DirList from './components/DirList'
 
 
  const App:React.FC =()=> {
@@ -19,7 +20,8 @@ import Details from './components/Details'
           <BrowserRouter>
             <Routes>
               <Route path='/' element={ <Content/>}/>
-              <Route path={"/Detail/:name"} element={ <Details />}/>
+              <Route path={"/Repository/:reponame"} element={ <Repository />}/>
+              <Route path={"/Repository/:reponame/:dirname"} element={ <DirList />}/>
             </Routes>
           </BrowserRouter>
         </div>
