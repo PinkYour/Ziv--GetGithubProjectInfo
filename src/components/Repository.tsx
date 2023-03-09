@@ -4,16 +4,16 @@ import { useParams, Link as RouteLink } from 'react-router-dom'
 import '../css/Repository.scss'
 import axios from 'axios'
 import { FolderOutlined, FileOutlined } from '@ant-design/icons'
-
+import Link from 'antd/es/typography/Link'
 
 
 
 const Repository: React.FC = () => {
-  const { name } = useParams()
+  const { reponame } = useParams()
   const [detailData, setDetailData] = useState<any[]>([])
   
   useEffect(() => {
-    axios.get(`https://api.github.com/repos/michaelliao/${name}/contents/`).then(
+    axios.get(`https://api.github.com/repos/michaelliao/${reponame}/contents/`).then(
       response => {
         let data=[...response.data];
         let prev:any[]=[];
@@ -25,6 +25,8 @@ const Repository: React.FC = () => {
             after.push(item)
           }
         })
+        console.log(123);
+        
         after.forEach((item)=>{
           prev.push(item)
         })
@@ -37,9 +39,9 @@ const Repository: React.FC = () => {
         console.log('获取数据失败', error)
       }
     )
-    console.log(name);
+    // console.log(reponame);
 
-  }, [])
+  },[reponame])
 
   return (
     <div className='Repository'>
@@ -48,7 +50,7 @@ const Repository: React.FC = () => {
           title: <RouteLink to='/'>主页</RouteLink>,
         },
         {
-          title: <RouteLink to={`/Dtails/${name}`}>{name}</RouteLink>,
+          title: <RouteLink to={`/Repository/${reponame}`}>{reponame}</RouteLink>,
         },
       ]}
       />
@@ -62,12 +64,12 @@ const Repository: React.FC = () => {
             <td>更新日期</td>
           </tr>
           {
+            // 
             detailData.map((item, index) => {
               switch (item['type']) {
                 case 'dir':
                   return<tr key={index} className='dir' >
-
-                    <th ><FolderOutlined />{item['name']}</th>
+                    <th ><Link href={`/Repository/${reponame}/${item['name']}`}> <FolderOutlined />{item['name']}</Link></th>
                     <td></td>
                     <td>{item['created_at']}</td>
                   </tr>;
