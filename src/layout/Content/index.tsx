@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Descriptions, Pagination } from 'antd';
+import { Descriptions, Pagination, } from 'antd';
+// import { Space, Table, Tag} from 'antd'
 import Link from 'antd/es/typography/Link';
 import './index.scss'
 
@@ -48,6 +49,8 @@ const Content: React.FC = () => {
                     </div>
                 })
             }
+              {/* <Table columns={columns} dataSource={data1} />; */}
+
             <Pagination
                 showSizeChanger
                 current={currentPage}
@@ -61,4 +64,5 @@ const Content: React.FC = () => {
     )
 };
 
-export default Content;
+
+  export default Content
