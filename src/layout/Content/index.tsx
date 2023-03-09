@@ -6,53 +6,45 @@ import './index.scss'
 
 const Content: React.FC = () => {
     const [data, setData] = useState([])
-    const [pageData, setPageData] = useState([])
     const [currentPage, setCurrentPage] = useState(1)
-
-    // console.log(start,end);
+    const [pageData, setPageData] = useState([])
     useEffect(() => {
         axios.get('https://api.github.com/users/michaelliao/repos').then(
             response => {
                 setData(response.data)
-                let arr = response.data.splice(0, 4)
-                setPageData(arr)
-                
+                setPageData(response.data.slice(0, 4))
             },
             error => {
                 console.log('获取数据失败', error)
-
             }
         )
 
     }, [])
-    //    console.log(data);
-
-    const ChangePage=(page:number)=>{
+    const ChangePage = (page: number, size: number) => {
         setCurrentPage(page)
-        console.log(page);
-        let start:number=(page-1)*4;
-        let end:number=page*4;
-        setPageData(data.slice(start,end))
+        console.log(page, size);
+        let start: number = (page - 1) * size;
+        let end: number = page * size;
+        setPageData(data.slice(start, end))
     }
-    
+    const ChangeSize = (current: number, size: number) => {
+        let start: number = (current - 1) * size;
+        let end: number = current * size;
+        setPageData(data.slice(start, end))
+    }
     return (
-
         <div className='Content'>
-
             {
                 pageData.map((item, index) => {
-
                     return <div key={index}>
-                        <Link href={`/Detail/${item['id']}`} target='_blank'>
+                        <Link href={`/Detail/${item['name']}`} >
                             <Descriptions title={"仓库(" + item['id'] + ')：' + item['name']} className='Item'>
                                 <Descriptions.Item label="Full_name(全称)">{item['full_name']}</Descriptions.Item>
                                 <Descriptions.Item label="Created_at">{item['created_at']}</Descriptions.Item>
                                 <Descriptions.Item label="Private">{item['private'] ? '私有' : '公有'}</Descriptions.Item>
                                 <Descriptions.Item label="Description(介绍)">{item['description'] ? item['description'] : '暂无介绍'}</Descriptions.Item>
-
                             </Descriptions>
                         </Link>
-
                     </div>
                 })
             }
@@ -61,7 +53,9 @@ const Content: React.FC = () => {
                 current={currentPage}
                 total={data.length}
                 defaultPageSize={4}
-                onChange={(page: number) => {ChangePage(page)}}
+                pageSizeOptions={[4, 6, 8, 10]}
+                onChange={(page: number, size: number) => { ChangePage(page, size) }}
+                onShowSizeChange={(current: number, size: number) => { ChangeSize(current, size) }}
             />
         </div>
     )
