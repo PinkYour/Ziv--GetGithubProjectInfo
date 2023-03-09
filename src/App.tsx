@@ -4,7 +4,7 @@ import Header from './layout/Header'
 import SiderBar from './layout/SiderBar'
 import Content from './layout/Content'
 import { BrowserRouter,Route,Routes } from 'react-router-dom'
-import Detail from './components/Detail'
+import Details from './components/Details'
 
 
  const App:React.FC =()=> {
@@ -19,7 +19,7 @@ import Detail from './components/Detail'
           <BrowserRouter>
             <Routes>
               <Route path='/' element={ <Content/>}/>
-              <Route path={"/Detail/:id"} element={ <Detail />}/>
+              <Route path={"/Detail/:name"} element={ <Details />}/>
             </Routes>
           </BrowserRouter>
         </div>
