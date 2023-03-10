@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios from '../../utils/axios';
 import { Descriptions, Pagination, } from 'antd';
 // import { Space, Table, Tag} from 'antd'
 import Link from 'antd/es/typography/Link';
 import './index.scss'
+import Dayjs from 'dayjs';
 
 const Content: React.FC = () => {
     const [data, setData] = useState([])
     const [currentPage, setCurrentPage] = useState(1)
     const [pageData, setPageData] = useState([])
     useEffect(() => {
-        axios.get('https://api.github.com/users/michaelliao/repos').then(
+        axios.get('users/michaelliao/repos').then(
             response => {
                 setData(response.data)
                 setPageData(response.data.slice(0, 4))
@@ -37,12 +38,18 @@ const Content: React.FC = () => {
         <div className='Content'>
             {
                 pageData.map((item, index) => {
+                    let date=Dayjs(item['created_at']).format()
+                    // console.log( date.substring(0,10));
+                    // console.log( date.substring(11,19));
+                   
+                    
                     return <div key={index}>
                         <Link href={`/Repository/${item['name']}`} >
-                            <Descriptions title={"仓库(" + item['id'] + ')：' + item['name']} className='Item'>
+                            <Descriptions title={"仓库：" + item['name']} className='Item'>
                                 <Descriptions.Item label="Full_name(全称)">{item['full_name']}</Descriptions.Item>
-                                <Descriptions.Item label="Created_at">{item['created_at']}</Descriptions.Item>
+                                <Descriptions.Item label="Created_at">{date.substring(0,10)+'—'+date.substring(11,19)}</Descriptions.Item>
                                 <Descriptions.Item label="Private">{item['private'] ? '私有' : '公有'}</Descriptions.Item>
+                                <Descriptions.Item label="ID">{item['id'] }</Descriptions.Item>
                                 <Descriptions.Item label="Description(介绍)">{item['description'] ? item['description'] : '暂无介绍'}</Descriptions.Item>
                             </Descriptions>
                         </Link>
