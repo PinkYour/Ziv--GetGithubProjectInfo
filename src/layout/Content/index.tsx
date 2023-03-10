@@ -39,10 +39,11 @@ const Content: React.FC = () => {
                 pageData.map((item, index) => {
                     return <div key={index}>
                         <Link href={`/Repository/${item['name']}`} >
-                            <Descriptions title={"仓库(" + item['id'] + ')：' + item['name']} className='Item'>
+                            <Descriptions title={"仓库：" + item['name']} className='Item'>
                                 <Descriptions.Item label="Full_name(全称)">{item['full_name']}</Descriptions.Item>
                                 <Descriptions.Item label="Created_at">{item['created_at']}</Descriptions.Item>
                                 <Descriptions.Item label="Private">{item['private'] ? '私有' : '公有'}</Descriptions.Item>
+                                <Descriptions.Item label="ID">{item['id'] }</Descriptions.Item>
                                 <Descriptions.Item label="Description(介绍)">{item['description'] ? item['description'] : '暂无介绍'}</Descriptions.Item>
                             </Descriptions>
                         </Link>
