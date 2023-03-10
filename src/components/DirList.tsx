@@ -18,6 +18,7 @@ const DirList: React.FC = () => {
             data.forEach((item) => {
                 if (item['type'] === 'dir') {
                     prev.push(item)
+                    
                 } else {
                     after.push(item)
                 }
@@ -69,7 +70,8 @@ const DirList: React.FC = () => {
                                         <td>{item['created_at']}</td>
                                     </tr>
 
-                            }
+                            }      
+                            
                         })
                     }
                 </tbody>
