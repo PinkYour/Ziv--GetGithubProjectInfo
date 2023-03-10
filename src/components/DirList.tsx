@@ -9,8 +9,9 @@ import Link from 'antd/es/typography/Link'
 const DirList: React.FC = () => {
     const { reponame, dirname } = useParams()
     const [list, setList] = useState<any[]>([])
+    const name=''
     useEffect(() => {
-        axios.get(`https://api.github.com/repos/michaelliao/${reponame}/contents/${dirname}`).then((res) => {
+        axios.get(`repos/${name}/${reponame}/contents/${dirname}`).then((res) => {
             // console.log(res.data);
             let data = [...res.data];
             let prev: any[] = [];

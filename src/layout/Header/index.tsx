@@ -1,29 +1,54 @@
-// import Search from 'antd/es/transfer/search'
-import React from 'react'
+import React, { Component } from 'react'
 import './index.scss'
-// import { AudioOutlined } from '@ant-design/icons';
-import { Input, Space } from 'antd';
+import { Input } from 'antd';
+import { connect } from 'react-redux';
+// import {} from
+// import { useParams } from 'react-router-dom'
+
+import { Dispatch } from 'redux';
+import { UpNameActionType} from '../../store/reducers/upName'
 
 const { Search } = Input;
-function index() {
-  const onSearch = (value: string) =>{
-    console.log(12);
-    
-  };
-  return (
-    <div className='Header'>
-      <Search
-        placeholder="input search text"
-        allowClear
-        enterButton="Search"
-        size="large"
-        loading={false}
-        onSearch={onSearch}
-        className='serchInput'
-      />
-      <button>login in</button>
-    </div>
-  )
+
+ interface Props{
+  name?:string,
+  serchUpName?(name:string):void
+}
+class Header extends Component<Props> {
+  
+  render(){
+    const onSearch = (value: string) =>{
+      // console.log(value);
+      this.props.serchUpName && this.props.serchUpName(value)
+      
+    };
+    // const {name}=
+    return (
+      <div className='Header'>
+        <Search
+          placeholder="input search text"
+          allowClear
+          enterButton="Search"
+          size="large"
+          loading={false}
+          onSearch={onSearch}
+          className='serchInput'
+        />
+        <button>{this.props.name}</button>
+      </div>
+    )
+  }
 }
 
-export default index
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  serchUpName: (name:string) => {
+    dispatch({
+      type: UpNameActionType.UPNAME,
+      payload: {upName:{name}}
+    })
+  },
+ 
+})
+
+
+export default connect(null,mapDispatchToProps)(Header)

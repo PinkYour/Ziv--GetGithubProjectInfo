@@ -2,7 +2,7 @@ import React from 'react'
 import './App.css'
 import Header from './layout/Header'
 import SiderBar from './layout/SiderBar'
-import Content from './layout/Content'
+import Main from './layout/Main'
 import { BrowserRouter,Route,Routes } from 'react-router-dom'
 import Repository from './components/Repository'
 import DirList from './components/DirList'
@@ -16,10 +16,10 @@ import DirList from './components/DirList'
           <SiderBar />
         </div>
         <div className='right'>
-          <Header />
+          <Header  />
           <BrowserRouter>
             <Routes>
-              <Route path='/' element={ <Content/>}/>
+              <Route path='/' element={ <Main/>}/>
               <Route path={"/Repository/:reponame"} element={ <Repository />}/>
               <Route path={"/Repository/:reponame/:dirname"} element={ <DirList />}/>
             </Routes>

@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import axios from '../../utils/axios';
+import axios from "../utils/axios";
 import { Descriptions, Pagination, } from 'antd';
-// import { Space, Table, Tag} from 'antd'
 import Link from 'antd/es/typography/Link';
-import './index.scss'
+import '../css/Content.scss'
 import Dayjs from 'dayjs';
+// import { UpNameState } from '../store/reducers/upName';
 
-const Content: React.FC = () => {
+
+const Content: React.FC<String>= (namess:String) => {
     const [data, setData] = useState([])
     const [currentPage, setCurrentPage] = useState(1)
     const [pageData, setPageData] = useState([])
+    console.log(namess);
+
     useEffect(() => {
-        axios.get('users/michaelliao/repos').then(
+        const name=namess
+        axios.get(`users/${name}/repos`).then(
             response => {
                 setData(response.data)
                 setPageData(response.data.slice(0, 4))
@@ -20,8 +24,9 @@ const Content: React.FC = () => {
                 console.log('获取数据失败', error)
             }
         )
-
+        // michaelliao
     }, [])
+    
     const ChangePage = (page: number, size: number) => {
         setCurrentPage(page)
         console.log(page, size);
@@ -35,14 +40,11 @@ const Content: React.FC = () => {
         setPageData(data.slice(start, end))
     }
     return (
+        <>
         <div className='Content'>
             {
                 pageData.map((item, index) => {
                     let date=Dayjs(item['created_at']).format()
-                    // console.log( date.substring(0,10));
-                    // console.log( date.substring(11,19));
-                   
-                    
                     return <div key={index}>
                         <Link href={`/Repository/${item['name']}`} >
                             <Descriptions title={"仓库：" + item['name']} className='Item'>
@@ -56,7 +58,6 @@ const Content: React.FC = () => {
                     </div>
                 })
             }
-              {/* <Table columns={columns} dataSource={data1} />; */}
 
             <Pagination
                 showSizeChanger
@@ -68,8 +69,8 @@ const Content: React.FC = () => {
                 onShowSizeChange={(current: number, size: number) => { ChangeSize(current, size) }}
             />
         </div>
+        </>
     )
 };
-
 
   export default Content
