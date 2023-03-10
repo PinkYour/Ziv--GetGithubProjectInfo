@@ -2,7 +2,7 @@ import Breadcrumb from 'antd/es/breadcrumb'
 import React, { useState, useEffect } from 'react'
 import { useParams, Link as RouteLink } from 'react-router-dom'
 import '../css/Repository.scss'
-import axios from 'axios'
+import axios from '../utils/axios'
 import { FolderOutlined, FileOutlined } from '@ant-design/icons'
 import Link from 'antd/es/typography/Link'
 
@@ -13,7 +13,7 @@ const Repository: React.FC = () => {
   const [detailData, setDetailData] = useState<any[]>([])
 
   useEffect(() => {
-    axios.get(`https://api.github.com/repos/michaelliao/${reponame}/contents/`).then(
+    axios.get(`repos/michaelliao/${reponame}/contents/`).then(
       response => {
         let data = [...response.data];
         let prev: any[] = [];

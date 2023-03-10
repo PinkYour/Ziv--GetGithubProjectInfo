@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios from '../../utils/axios';
 import { Descriptions, Pagination, } from 'antd';
 // import { Space, Table, Tag} from 'antd'
 import Link from 'antd/es/typography/Link';
@@ -11,7 +11,7 @@ const Content: React.FC = () => {
     const [currentPage, setCurrentPage] = useState(1)
     const [pageData, setPageData] = useState([])
     useEffect(() => {
-        axios.get('https://api.github.com/users/michaelliao/repos').then(
+        axios.get('users/michaelliao/repos').then(
             response => {
                 setData(response.data)
                 setPageData(response.data.slice(0, 4))
