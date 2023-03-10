@@ -2,4 +2,16 @@
     height: 120px;
     width: 100%;
     background-color: rgb(230, 244, 244);
+    // text-align: center;
+    position: relative;
+    border: 1px solid navajowhite;
+    box-sizing: border-box;
+    .serchInput{
+        width: 400px;
+        // margin-top: 20px;
+        // left:12px;
+        position: fixed;
+        right: 150px;
+        top: 30px;
+    }
 }
