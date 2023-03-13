@@ -5,6 +5,7 @@ export type UpNameState ={
 }
 const initState={
     upName:{
+        // name:'PinkYour',
         name:''
     }
     

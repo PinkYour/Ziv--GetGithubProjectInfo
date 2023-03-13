@@ -20,6 +20,7 @@ class Header extends Component<Props> {
     const onSearch = (value: string) =>{
       // console.log(value);
       this.props.serchUpName && this.props.serchUpName(value)
+      sessionStorage.setItem('name',value)
       
     };
     // const {name}=
