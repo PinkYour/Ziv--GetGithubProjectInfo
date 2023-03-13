@@ -34,7 +34,7 @@ class Header extends Component<Props> {
           onSearch={onSearch}
           className='serchInput'
         />
-        <button>{this.props.name}</button>
+        {/* <button>{this.props.name}</button> */}
       </div>
     )
   }

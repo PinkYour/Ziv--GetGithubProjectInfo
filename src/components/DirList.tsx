@@ -10,7 +10,7 @@ const DirList: React.FC = () => {
     const { reponame, dirname } = useParams()
     const [list, setList] = useState<any[]>([])
     // console.log(reponame);
-    
+    // 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
     // const name=''+sessionStorage.getItem('name');
     useEffect(() => {
         axios.get(`https://api.github.com/repos/${sessionStorage.getItem('name')}/${reponame}/contents/${dirname}`).then((res) => {
