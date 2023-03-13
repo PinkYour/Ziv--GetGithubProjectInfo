@@ -9,10 +9,11 @@ import Link from 'antd/es/typography/Link'
 const DirList: React.FC = () => {
     const { reponame, dirname } = useParams()
     const [list, setList] = useState<any[]>([])
-    const name=''
+    // console.log(reponame);
+    
+    // const name=''+sessionStorage.getItem('name');
     useEffect(() => {
-        axios.get(`repos/${name}/${reponame}/contents/${dirname}`).then((res) => {
-            // console.log(res.data);
+        axios.get(`https://api.github.com/repos/${sessionStorage.getItem('name')}/${reponame}/contents/${dirname}`).then((res) => {
             let data = [...res.data];
             let prev: any[] = [];
             let after: any[] = []
@@ -27,7 +28,6 @@ const DirList: React.FC = () => {
             after.forEach((item) => {
                 prev.push(item)
             })
-            //  let arr:object[] =prev.concat(after)
             setList(prev)
         }).catch((err) => {
             console.log('出错了', err);
@@ -70,9 +70,7 @@ const DirList: React.FC = () => {
                                         <td>{item['size']}</td>
                                         <td>{item['created_at']}</td>
                                     </tr>
-
                             }      
-                            
                         })
                     }
                 </tbody>

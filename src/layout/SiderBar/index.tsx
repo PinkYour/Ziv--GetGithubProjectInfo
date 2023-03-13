@@ -17,7 +17,16 @@ const Index:React.FC<{ upName: UpNameState }>=(props:{ upName: UpNameState })=> 
   
   useEffect(() => {
     // setUpName(props.upName.upName.name)
+    if (sessionStorage.getItem('name')===null) {
+      // console.log(sessionStorage.getItem('name'));
+      setUpName(props.upName.upName.name)
+      
+  }else{
     setUpName(sessionStorage.getItem('name')+'')
+      // console.log('else');
+      
+  }
+    // setUpName(sessionStorage.getItem('name')+'')
     // console.log(upName);
     axios.get(`https://api.github.com/users/${upName}`).then(
         response => {

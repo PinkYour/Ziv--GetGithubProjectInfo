@@ -5,15 +5,24 @@ import '../css/Repository.scss'
 import axios from '../utils/axios'
 import { FolderOutlined, FileOutlined } from '@ant-design/icons'
 import Link from 'antd/es/typography/Link'
+import { connect } from 'react-redux'
+import { rootState } from '../store'
+import { UpNameState } from '../store/reducers/upName'
 
 
-
-const Repository: React.FC = () => {
+// https://api.github.com/users/PinkYour
+const Repository: React.FC<{ upName: UpNameState }> = (props:{ upName: UpNameState }) => {
   const { reponame } = useParams()
   const [detailData, setDetailData] = useState<any[]>([])
+  // const [upName,setUpName]=useState('')
 
   useEffect(() => {
-    axios.get(`repos/michaelliao/${reponame}/contents/`).then(
+    // setUpName(props.upName.upName.name)
+    // console.log(props);
+    // console.log('sess',sessionStorage.getItem('name'));
+    
+    
+    axios.get(`repos/${sessionStorage.getItem('name')}/${reponame}/contents/`).then(
       response => {
         let data = [...response.data];
         let prev: any[] = [];
@@ -26,13 +35,10 @@ const Repository: React.FC = () => {
               prev.unshift(item)
 
             }else{
-
               after.push(item)
             }
           }
         })
-        
-        
         after.forEach((item) => {
           if (item['name'] === '.gitignore') {
             prev.unshift(item)
@@ -41,8 +47,6 @@ const Repository: React.FC = () => {
         })
         //  let arr:object[] =prev.concat(after)
         setDetailData(prev)
-
-
       },
       error => {
         console.log('获取数据失败', error)
@@ -106,5 +110,12 @@ const Repository: React.FC = () => {
 }
 
 
-export default Repository
+// export default Repository
+const mapStateToProps = (state: rootState) => {
+  // sessionStorage.clear()
+  console.log(state.upName.upName.name);
+  
+  return state
+}
 
+export default connect(mapStateToProps, null)(Repository)

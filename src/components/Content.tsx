@@ -11,7 +11,9 @@ import WithoutData from '../components/WithoutData'
 
 // import { UpNameState } from '../store/reducers/upName';
 
+// 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
 
+// 5dc71cadc1d32ca18330374c511ca9cdbb1ccef2
 const Content: React.FC<{ upName: UpNameState }> = (props: { upName: UpNameState }) => {
     const [data, setData] = useState([])
     const [currentPage, setCurrentPage] = useState(1)
@@ -34,11 +36,17 @@ const Content: React.FC<{ upName: UpNameState }> = (props: { upName: UpNameState
     // localStorage.name=name;
     // console.log(localStorage.getItem('name'));
     
-    console.log(sessionStorage.getItem('name'));
      
     useEffect(() => {
+        if (sessionStorage.getItem('name')===null) {
+            // console.log(sessionStorage.getItem('name'));
+            setName(props.upName.upName.name)
+            
+        }else{
+            setName(sessionStorage.getItem('name')+'')
+            
+        }
         // setName(props.upName.upName.name)
-        setName(sessionStorage.getItem('name')+'')
         axios.get(`users/${name}/repos`).then(
             response => {
                 setData(response.data)
@@ -49,7 +57,7 @@ const Content: React.FC<{ upName: UpNameState }> = (props: { upName: UpNameState
             }
         )
         // michaelliao
-    }, [name])
+    }, [name,props])
     if (name === '' && localStorage.getItem('name') === '') {
         return (
             <WithoutData />
@@ -61,7 +69,7 @@ const Content: React.FC<{ upName: UpNameState }> = (props: { upName: UpNameState
                     {
                         pageData.map((item, index) => {
                             let date = Dayjs(item['created_at']).format()
-                            return <div key={index}>
+                            return <div key={index} >
                                 <Link href={`/Repository/${item['name']}`} >
                                     <Descriptions title={"仓库：" + item['name']} className='Item'>
                                         <Descriptions.Item label="Full_name(全称)">{item['full_name']}</Descriptions.Item>
@@ -92,6 +100,7 @@ const Content: React.FC<{ upName: UpNameState }> = (props: { upName: UpNameState
 
 //   export default Content
 const mapStateToProps = (state: rootState) => {
+    // sessionStorage.clear()
     return state
 }
 

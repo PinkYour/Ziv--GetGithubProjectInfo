@@ -23,7 +23,6 @@ class Header extends Component<Props> {
       sessionStorage.setItem('name',value)
       
     };
-    // const {name}=
     return (
       <div className='Header'>
         <Search
