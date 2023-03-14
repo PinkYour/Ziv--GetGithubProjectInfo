@@ -16,7 +16,7 @@ const DirList: React.FC = () => {
         axios({
             url: `https://api.github.com/repos/${sessionStorage.getItem('name')}/${reponame}/contents/${dirname}`,
             method: 'GET',
-            headers: { "Authorization": `token ${'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'}` }
+            headers: { "Authorization": `token ${'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'}` }
         })
             .then(res => {
                 let data = [...res.data];

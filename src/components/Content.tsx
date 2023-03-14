@@ -19,10 +19,8 @@ const Content: React.FC<{ upName: UpNameState }> = (props: { upName: UpNameState
     const [currentPage, setCurrentPage] = useState(1)
     const [pageData, setPageData] = useState([])
     const [name,setName] = useState('')
-    
     const ChangePage = (page: number, size: number) => {
         setCurrentPage(page)
-        // console.log(page, size);
         let start: number = (page - 1) * size;
         let end: number = page * size;
         setPageData(data.slice(start, end))
@@ -32,21 +30,24 @@ const Content: React.FC<{ upName: UpNameState }> = (props: { upName: UpNameState
         let end: number = current * size;
         setPageData(data.slice(start, end))
     }
-     
     useEffect(() => {
+        // console.log(props.upName.upName.name);
+        
         if (sessionStorage.getItem('name')===null) {
-            // console.log(sessionStorage.getItem('name'));
             setName(props.upName.upName.name)
             
         }else{
             setName(sessionStorage.getItem('name')+'')
-            
         }
-        // setName(props.upName.upName.name)
-    axios({ url: `https://api.github.com/users/${name}/repos`, 
-    method: 'GET', 
-    headers: { "Authorization": `token ${'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'}` } })
+    axios({ 
+        url: `https://api.github.com/users/${name}/repos`, 
+        // url: `https://api.github.com/users/PinkYour/repos`, 
+        method: 'GET', 
+        headers: { "Authorization": `token ${'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'}` } 
+    })
     .then(response=>{
+        console.log(response);
+        
                 setData(response.data)
                 setPageData(response.data.slice(0, 4))
             },

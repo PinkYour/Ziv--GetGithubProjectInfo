@@ -6,7 +6,8 @@ export type UpNameState ={
 const initState={
     upName:{
         // name:'PinkYour',
-        name:localStorage.getItem('name')+''
+        name:''
+        // name:localStorage.getItem('name')+''
     }
     
 }

@@ -7,7 +7,7 @@ import { FolderOutlined, FileOutlined } from '@ant-design/icons'
 import Link from 'antd/es/typography/Link'
 import { connect } from 'react-redux'
 import { rootState } from '../store'
-import { UpNameState } from '../store/reducers/upName'
+// import { UpNameState } from '../store/reducers/upName'
 
 
 // https://api.github.com/users/PinkYour
@@ -26,7 +26,7 @@ const Repository: React.FC = () => {
     axios({
       url: `https://api.github.com/repos/${sessionStorage.getItem('name')}/${reponame}/contents/`,
       method: 'GET',
-      headers: { "Authorization": `token ${'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'}` }
+      headers: { "Authorization": `token ${'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'}` }
   })
       .then(response => {
 

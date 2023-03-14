@@ -1,17 +1,14 @@
 .Header{
-    height: 120px;
     width: 100%;
+    height: 120px;
     background-color: rgb(230, 244, 244);
-    // text-align: center;
     position: relative;
-    // border: 1px solid navajowhite;
+    top: 0;
     box-sizing: border-box;
     .serchInput{
         width: 400px;
-        // margin-top: 20px;
         position: relative;
         left:20px;
-        // right: 150px;
         top: 30px;
     }
     .btn{

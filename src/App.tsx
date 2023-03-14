@@ -5,8 +5,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Repository from './components/Repository'
 import DirList from './components/DirList'
 import Login from './components/Login'
-import SiderBar from './layout/SiderBar'
-import Header from './layout/Header'
+// import SiderBar from './layout/SiderBar'
+// import Header from './layout/Header'
 import Register from './components/Register'
 // import axios from 'axios'
 
@@ -15,14 +15,11 @@ import Register from './components/Register'
 const App: React.FC = () => {
   return (
     <div className='App'>
-      <div className="left">
-        <SiderBar />
-      </div>
-      <div className="right">
-        <Header />
-        <BrowserRouter>
+       
+         <BrowserRouter>
           <Routes>
             <Route path='/' element={<Main />} />
+            <Route path='/Main' element={<Main />} />
             <Route path='/Login' element={<Login />} />
             <Route path='/Register' element={<Register />} />
             <Route path='/Repository/:reponame' element={<Repository />} />
@@ -30,7 +27,7 @@ const App: React.FC = () => {
 
           </Routes>
         </BrowserRouter>
-      </div>
+      
     </div>
   )
 }
