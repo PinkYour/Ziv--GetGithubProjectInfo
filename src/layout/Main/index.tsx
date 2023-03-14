@@ -1,42 +1,52 @@
-import React, { useEffect, useState } from 'react'
-// import { connect } from 'react-redux'
-// import { rootState } from '../../store'
-// import WithoutData from '../../components/WithoutData'
+import React, { useEffect } from 'react'
+import {  BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom'
 import Content from '../../components/Content'
-// import { UpNameState } from '../../store/reducers/upName'
+// import DirList from '../../components/DirList'
+// import Login from '../../components/Login'
+// import Register from '../../components/Register'
+// import Repository from '../../components/Repository'
+// import DirList from '../../components/DirList'
+// import Repository from '../../components/Repository'
+import Header from '../Header'
+import SiderBar from '../SiderBar'
+
+import './index.scss'
+
 
 const Main: React.FC = () => {
-  // const name1: String = props.upName.upName.name
-  // console.log(typeof(name1));
-  
-  // const [name,setName]=useState('')
-  // // const name=name1+''
-  // useEffect(()=>{
-  //   setName(props.upName.upName.name)
-    
-  // })
-  // console.log("Main",name);
-  // sessionStorage.setItem("name", name.upName.name);
-  // name=sessionStorage.getItem('name') === ''
-  // if (name.upName.name === '' && sessionStorage.getItem('name') === '') {
-  //   return (
-  //     <div className='Main'>
-  //       <WithoutData />
-  //     </div>
-  //   )
-  // }
-  // else {
-    return (
-      <div className='Main'>
-        {/* {console.log('Main',name)} */}
-        <Content  />
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    // console.log(localStorage.getItem('isLogin'));
+    //判断是否登录过
+    if (localStorage.getItem('isLogin') === 'false') {
+      navigate('/Login')
+    } else {
+      navigate('/')
+    }
+  }, [])
+  return (
+    <div className='Main'>
+      <div className="left">
+        <SiderBar />
       </div>
-    )
+      <div className="right">
+        <Header />
+        <Content />
+      </div>
+      {/* <BrowserRouter>
+          <Routes>
+            <Route path='/' element={<Main />} />
+            <Route path='/Main' element={<Main />} />
+            <Route path='/Login' element={<Login />} />
+            <Route path='/Register' element={<Register />} />
+            <Route path='/Main/Repository/:reponame' element={<Repository />} />
+            <Route path='/Main/Repository/:reponame/:dirname' element={<DirList />} />
+          </Routes>
+        </BrowserRouter> */}
+    </div>
+  )
   // }
 }
-// const mapStateToProps = (state: rootState) => {
-//   return state
-// }
-
-// export default connect(mapStateToProps, null)(Main)
 export default Main

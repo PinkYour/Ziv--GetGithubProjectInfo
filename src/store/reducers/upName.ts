@@ -7,10 +7,11 @@ const initState={
     upName:{
         // name:'PinkYour',
         name:''
+        // name:localStorage.getItem('name')+''
     }
     
 }
-
+// const upName:string=localStorage.getItem('name')
 export enum UpNameActionType {
     INIT,
     UPNAME,

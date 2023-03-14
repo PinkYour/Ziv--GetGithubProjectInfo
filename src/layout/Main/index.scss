@@ -1,3 +1,19 @@
 .Main{
-    
+    // margin: 0;
+    width: 100%;
+    position: relative;
+
+    .left{
+        width: 18%;
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+    }
+    .right{
+        width: 82%;
+        position: fixed;
+        // right: 0;
+        left: 18%;
+    }
 }
