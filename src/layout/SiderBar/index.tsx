@@ -6,7 +6,7 @@ import Link from 'antd/es/typography/Link'
 import { rootState } from '../../store'
 import { connect } from 'react-redux'
 import { UpNameState } from '../../store/reducers/upName'
-import Login from '../../pages/Login'
+// import Login from '../../pages/Login'
 
 const Index:React.FC<{ upName: UpNameState }>=(props:{ upName: UpNameState })=> {
   const [avatarurl,setAvatarurl]=useState('')
@@ -20,6 +20,8 @@ const Index:React.FC<{ upName: UpNameState }>=(props:{ upName: UpNameState })=> 
     if (sessionStorage.getItem('name')===null) {
       // console.log(sessionStorage.getItem('name'));
       setUpName(props.upName.upName.name)
+      console.log();
+      
       
   }else{
     setUpName(sessionStorage.getItem('name')+'')
@@ -27,10 +29,14 @@ const Index:React.FC<{ upName: UpNameState }>=(props:{ upName: UpNameState })=> 
       
   }
     // setUpName(sessionStorage.getItem('name')+'')
-    // console.log(upName);
-    axios.get(`https://api.github.com/users/${upName}`).then(
-        response => {
-            // console.log('获取数据成功:side',response.data)
+    console.log('11',upName);
+    axios({ url: `https://api.github.com/users/${upName}`, 
+    method: 'GET', 
+    headers: { "Authorization": `token ${'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'}` } })
+    .then(response=>{
+    // axios.get(`https://api.github.com/users/${upName}`).then(
+    //     response => {
+            // console.log('获取数据成功:side',response.data[''])
             setAvatarurl(response.data['avatar_url'])
             setName(response.data['login'])
             setHomepage(response.data['html_url'])

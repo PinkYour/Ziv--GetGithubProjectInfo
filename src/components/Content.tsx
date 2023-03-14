@@ -32,10 +32,6 @@ const Content: React.FC<{ upName: UpNameState }> = (props: { upName: UpNameState
         let end: number = current * size;
         setPageData(data.slice(start, end))
     }
-    
-    // localStorage.name=name;
-    // console.log(localStorage.getItem('name'));
-    
      
     useEffect(() => {
         if (sessionStorage.getItem('name')===null) {
@@ -47,8 +43,10 @@ const Content: React.FC<{ upName: UpNameState }> = (props: { upName: UpNameState
             
         }
         // setName(props.upName.upName.name)
-        axios.get(`users/${name}/repos`).then(
-            response => {
+    axios({ url: `https://api.github.com/users/${name}/repos`, 
+    method: 'GET', 
+    headers: { "Authorization": `token ${'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'}` } })
+    .then(response=>{
                 setData(response.data)
                 setPageData(response.data.slice(0, 4))
             },
@@ -69,6 +67,8 @@ const Content: React.FC<{ upName: UpNameState }> = (props: { upName: UpNameState
                     {
                         pageData.map((item, index) => {
                             let date = Dayjs(item['created_at']).format()
+                            // console.log(item);
+                            
                             return <div key={index} >
                                 <Link href={`/Repository/${item['name']}`} >
                                     <Descriptions title={"仓库：" + item['name']} className='Item'>

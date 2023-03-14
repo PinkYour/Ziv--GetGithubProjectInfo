@@ -11,19 +11,27 @@ import { UpNameState } from '../store/reducers/upName'
 
 
 // https://api.github.com/users/PinkYour
-const Repository: React.FC<{ upName: UpNameState }> = (props:{ upName: UpNameState }) => {
+const Repository: React.FC = () => {
+  // console.log(useParams);
+
   const { reponame } = useParams()
   const [detailData, setDetailData] = useState<any[]>([])
   // const [upName,setUpName]=useState('')
 
   useEffect(() => {
     // setUpName(props.upName.upName.name)
-    // console.log(props);
-    // console.log('sess',sessionStorage.getItem('name'));
-    
-    
-    axios.get(`repos/${sessionStorage.getItem('name')}/${reponame}/contents/`).then(
-      response => {
+
+    // console.log(reponame);
+    // console.log('sess', sessionStorage.getItem('name'));
+    axios({
+      url: `https://api.github.com/repos/${sessionStorage.getItem('name')}/${reponame}/contents/`,
+      method: 'GET',
+      headers: { "Authorization": `token ${'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'}` }
+  })
+      .then(response => {
+
+    // axios.get(`repos/${sessionStorage.getItem('name')}/${reponame}/contents/`).then(
+    //   response => {
         let data = [...response.data];
         let prev: any[] = [];
         let after: any[] = []
@@ -34,7 +42,7 @@ const Repository: React.FC<{ upName: UpNameState }> = (props:{ upName: UpNameSta
             if (item['name'] === '.gitignore') {
               prev.unshift(item)
 
-            }else{
+            } else {
               after.push(item)
             }
           }
@@ -80,7 +88,7 @@ const Repository: React.FC<{ upName: UpNameState }> = (props:{ upName: UpNameSta
             // 
             detailData.map((item, index) => {
               if (item['name'] === '.gitignore') {
-                return <tr key={index}  className='dir'>
+                return <tr key={index} className='dir'>
                   <th > <FolderOutlined />{item['name']}</th>
                   <td></td>
                   <td>{item['created_at']}</td>
@@ -114,7 +122,7 @@ const Repository: React.FC<{ upName: UpNameState }> = (props:{ upName: UpNameSta
 const mapStateToProps = (state: rootState) => {
   // sessionStorage.clear()
   console.log(state.upName.upName.name);
-  
+
   return state
 }
 

@@ -13,27 +13,32 @@ const DirList: React.FC = () => {
     // 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
     // const name=''+sessionStorage.getItem('name');
     useEffect(() => {
-        axios.get(`https://api.github.com/repos/${sessionStorage.getItem('name')}/${reponame}/contents/${dirname}`).then((res) => {
-            let data = [...res.data];
-            let prev: any[] = [];
-            let after: any[] = []
-            data.forEach((item) => {
-                if (item['type'] === 'dir') {
-                    prev.push(item)
-                    
-                } else {
-                    after.push(item)
-                }
-            })
-            after.forEach((item) => {
-                prev.push(item)
-            })
-            setList(prev)
-        }).catch((err) => {
-            console.log('出错了', err);
-
+        axios({
+            url: `https://api.github.com/repos/${sessionStorage.getItem('name')}/${reponame}/contents/${dirname}`,
+            method: 'GET',
+            headers: { "Authorization": `token ${'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'}` }
         })
-    })
+            .then(res => {
+                let data = [...res.data];
+                let prev: any[] = [];
+                let after: any[] = []
+                data.forEach((item) => {
+                    if (item['type'] === 'dir') {
+                        prev.push(item)
+
+                    } else {
+                        after.push(item)
+                    }
+                })
+                after.forEach((item) => {
+                    prev.push(item)
+                })
+                setList(prev)
+            }).catch((err) => {
+                console.log('出错了', err);
+
+            })
+    }, [])
     return (
         <div className='DirList'>
             <Breadcrumb items={[
@@ -70,7 +75,7 @@ const DirList: React.FC = () => {
                                         <td>{item['size']}</td>
                                         <td>{item['created_at']}</td>
                                     </tr>
-                            }      
+                            }
                         })
                     }
                 </tbody>

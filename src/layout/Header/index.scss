@@ -4,14 +4,18 @@
     background-color: rgb(230, 244, 244);
     // text-align: center;
     position: relative;
-    border: 1px solid navajowhite;
+    // border: 1px solid navajowhite;
     box-sizing: border-box;
     .serchInput{
         width: 400px;
         // margin-top: 20px;
-        left:750px;
         position: relative;
+        left:20px;
         // right: 150px;
         top: 30px;
+    }
+    .btn{
+        position: relative;
+        left: 1020px;
     }
 }
