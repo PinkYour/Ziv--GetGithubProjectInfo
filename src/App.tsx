@@ -8,6 +8,7 @@ import Login from './components/Login'
 // import SiderBar from './layout/SiderBar'
 // import Header from './layout/Header'
 import Register from './components/Register'
+import Content from './components/Content'
 // import axios from 'axios'
 
 // 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
@@ -15,19 +16,21 @@ import Register from './components/Register'
 const App: React.FC = () => {
   return (
     <div className='App'>
-       
-         <BrowserRouter>
-          <Routes>
-            <Route path='/' element={<Main />} />
-            <Route path='/Main' element={<Main />} />
-            <Route path='/Login' element={<Login />} />
-            <Route path='/Register' element={<Register />} />
-            <Route path='/Repository/:reponame' element={<Repository />} />
-            <Route path='/Repository/:reponame/:dirname' element={<DirList />} />
 
-          </Routes>
-        </BrowserRouter>
-      
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Main />} >
+            
+          </Route>
+          <Route path='/Main' element={<Main />} >
+          </Route>
+          <Route path='/Login' element={<Login />} />
+          <Route path='/Register' element={<Register />} />
+          <Route path='Content/:reponame' element={<Repository />} />
+          <Route path='Content/:reponame/:dirname' element={<DirList />} />
+        </Routes>
+      </BrowserRouter>
+
     </div>
   )
 }

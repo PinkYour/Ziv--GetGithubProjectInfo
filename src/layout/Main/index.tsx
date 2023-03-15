@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import {  BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom'
 import Content from '../../components/Content'
+import DirList from '../../components/DirList'
+import Repository from '../../components/Repository'
 // import DirList from '../../components/DirList'
 // import Login from '../../components/Login'
 // import Register from '../../components/Register'
@@ -18,7 +20,6 @@ const Main: React.FC = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    // console.log(localStorage.getItem('isLogin'));
     //判断是否登录过
     if (localStorage.getItem('isLogin') === 'false') {
       navigate('/Login')
@@ -33,19 +34,16 @@ const Main: React.FC = () => {
       </div>
       <div className="right">
         <Header />
-        <Content />
+        <Content/>
+        {/* <Routes>
+            <Route path='/' element={<Content />} />
+            <Route path='Content' element={<Content />} />
+            <Route path='Content/:reponame' element={<Repository />} />
+            <Route path='Content/:reponame/:dirname' element={<DirList />} />
+        </Routes> */}
+        
       </div>
-      {/* <BrowserRouter>
-          <Routes>
-            <Route path='/' element={<Main />} />
-            <Route path='/Main' element={<Main />} />
-            <Route path='/Login' element={<Login />} />
-            <Route path='/Register' element={<Register />} />
-            <Route path='/Main/Repository/:reponame' element={<Repository />} />
-            <Route path='/Main/Repository/:reponame/:dirname' element={<DirList />} />
-          </Routes>
-        </BrowserRouter> */}
-    </div>
+     </div>
   )
   // }
 }

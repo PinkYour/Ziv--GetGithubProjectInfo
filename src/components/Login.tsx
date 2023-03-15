@@ -1,7 +1,7 @@
 import { Button, Form, Input } from 'antd';
 import React, { useState } from 'react';
 import '../css/Login.scss'
-import { } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useNavigate } from "react-router-dom";
 import userInfo from '../UserInfo'
 
@@ -22,7 +22,7 @@ const Login: React.FC = () => {
     const navigate = useNavigate()
     const judge = async (values: UserInfo) => { //模拟后端判断
         for (let index = 0; index < userInfo.length; index++) {
-            if (userInfo[index].name === values.note && userInfo[index].pwd === values.gender) {
+            if (userInfo[index].name === values.note && userInfo[index].password === values.gender) {
                 localStorage.setItem('isLogin', 'true')
                 localStorage.setItem('userName', values.note)
                 navigate('/')
@@ -52,6 +52,8 @@ const Login: React.FC = () => {
             <h1>GitHub仓库查看器</h1>
             <br />
             <br />
+            <h3>请登录</h3>
+            <br />
             <Form
                 {...layout}
                 form={form}
@@ -59,7 +61,7 @@ const Login: React.FC = () => {
                 onFinish={onFinish}
                 style={{ maxWidth: 600, marginLeft: 350 }}
             >
-                <Form.Item name="note" label="名称">
+                <Form.Item name="note" label="昵称">
                     <Input />
                 </Form.Item>
                 <Form.Item name="gender" label="密码" >
@@ -79,11 +81,15 @@ const Login: React.FC = () => {
                 </Form.Item>
                 <Form.Item {...tailLayout}>
                     <Button type="primary" htmlType="submit">
-                        Submit
+                        登录
                     </Button>
+                    <span> &nbsp;</span>
                     <Button htmlType="button" onClick={onReset}>
-                        Reset
+                        重置
                     </Button>
+                    <span> &nbsp;</span>
+
+                    <Link to='/Register'>注册</Link>
 
                 </Form.Item>
             </Form>
