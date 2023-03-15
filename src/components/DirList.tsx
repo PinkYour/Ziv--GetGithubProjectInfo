@@ -7,6 +7,7 @@ import { Breadcrumb } from 'antd'
 import Link from 'antd/es/typography/Link'
 import Header from '../layout/Header'
 import SiderBar from '../layout/SiderBar'
+import token from '../token'
 
 const DirList: React.FC = () => {
     const { reponame, dirname } = useParams()
@@ -18,7 +19,7 @@ const DirList: React.FC = () => {
         axios({
             url: `https://api.github.com/repos/${sessionStorage.getItem('name')}/${reponame}/contents/${dirname}`,
             method: 'GET',
-            headers: { "Authorization": `token ${'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'}` }
+            headers: { "Authorization": `token ${token}` }
         })
             .then(res => {
                 let data = [...res.data];
@@ -43,15 +44,15 @@ const DirList: React.FC = () => {
     }, [])
     return (
         <>
-            <div className="left">
+            {/* <div className="left">
                 <SiderBar />
             </div>
             <div className="right">
-                <Header />
+                <Header /> */}
                 <div className='DirList'>
                     <Breadcrumb items={[
                         {
-                            title: <RouteLink to='/'>主页</RouteLink>,
+                            title: <RouteLink to='/Content'>主页</RouteLink>,
                         },
                         {
                             title: <RouteLink to={`/Content/${reponame}`}>{reponame}</RouteLink>,
@@ -89,7 +90,7 @@ const DirList: React.FC = () => {
                         </tbody>
                     </table>
                 </div>
-            </div>
+            {/* </div> */}
         </>
 
     )

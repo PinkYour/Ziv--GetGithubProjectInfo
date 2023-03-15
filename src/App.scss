@@ -1,19 +1,9 @@
 .App{
     width: 100%;
-    /* height: 100%; */
-    height: auto;
+     height: 600px; 
+    // overflow-y: scroll;
+    display: block;
+    // height: auto;
     position: relative;
-      .left{
-        width: 18%;
-        position: fixed;
-        left: 0;
-        top: 0;
-        bottom: 0;
-    }
-    .right{
-        width: 82%;
-        position: fixed;
-        // right: 0;
-        left: 18%;
-    }
+    
 }

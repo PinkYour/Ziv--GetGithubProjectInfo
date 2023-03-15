@@ -19,15 +19,9 @@ const App: React.FC = () => {
 
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Main />} >
-            
-          </Route>
-          <Route path='/Main' element={<Main />} >
-          </Route>
-          <Route path='/Login' element={<Login />} />
-          <Route path='/Register' element={<Register />} />
-          <Route path='Content/:reponame' element={<Repository />} />
-          <Route path='Content/:reponame/:dirname' element={<DirList />} />
+          <Route path='/*' element={<Main />}></Route>
+          <Route path='/Login' element={<Login />} ></Route>
+          <Route path='/Register' element={<Register />} ></Route>
         </Routes>
       </BrowserRouter>
 

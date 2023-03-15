@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 
 import { Dispatch } from 'redux';
 import { UpNameActionType } from '../../store/reducers/upName'
+import { useNavigate } from 'react-router-dom';
+import SearchCom from '../../components/SearchCom';
 
 const { Search } = Input;
 
@@ -14,57 +16,35 @@ interface Props {
   serchUpName?(name: string): void
 }
 class Header extends Component<Props> {
-
+  // constructor(props){
+  //   super(props)
+    
+  // }
   render() {
-    const onSearch = (value: string) => {
-      // console.log(value);
-      this.props.serchUpName && this.props.serchUpName(value)
-      sessionStorage.setItem('name', value)
-      
-    };
-    if (this.props.name==='') {
-      
-      return (
-        <div className='Header'>
+    // let pro=this.props
+    // if (this.props.name==='') {
+    //   return (
+    //     <div className='Header'>
+    //       <SearchCom />
+    //       <div className='btn'>
+    //         <Button type="primary" size={'small'} href='/Login'>
+    //           登录
+    //         </Button>
+    //         <span> &nbsp;</span>
+    //         <Button type="default" size={'small'} href='/Register'>
+    //           注册
+    //         </Button>
   
-          <Search
-            placeholder="input search text"
-            allowClear
-            enterButton="Search"
-            size="large"
-            loading={false}
-            onSearch={onSearch}
-            className='serchInput'
-          />
-          {/* <button>{this.props.name}</button> */}
-          <div className='btn'>
-            <Button type="primary" size={'small'} href='/Login'>
-              登录
-            </Button>
-            <span> &nbsp;</span>
-            <Button type="default" size={'small'} href='/Register'>
-              注册
-            </Button>
-  
-          </div>
-        </div>
-      )
-    }
-    else{
+    //       </div>
+    //     </div>
+    //   )
+    // }
+    // else{
       const userName=localStorage.getItem('userName')
       return (
         <div className='Header'>
-  
-          <Search
-            placeholder="input search text"
-            allowClear
-            enterButton="Search"
-            size="large"
-            loading={false}
-            onSearch={onSearch}
-            className='serchInput'
-          />
-          {/* <button>{this.props.name}</button> */}
+          <SearchCom/>
+
           <div className='btn'>
             <span>欢迎：{userName} </span>
               &nbsp;
@@ -80,7 +60,7 @@ class Header extends Component<Props> {
         </div>
       )
     }
-  }
+  // }
 }
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
