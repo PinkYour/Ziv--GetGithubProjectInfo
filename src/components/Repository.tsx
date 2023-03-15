@@ -9,6 +9,7 @@ import { connect } from 'react-redux'
 import { rootState } from '../store'
 import Header from '../layout/Header'
 import SiderBar from '../layout/SiderBar'
+import token from '../token'
 
 
 const Repository: React.FC = () => {
@@ -20,7 +21,7 @@ const Repository: React.FC = () => {
     axios({
       url: `https://api.github.com/repos/${sessionStorage.getItem('name')}/${reponame}/contents/`,
       method: 'GET',
-      headers: { "Authorization": `token ${'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'}` }
+      headers: { "Authorization": `token ${token}` }
     })
       .then(response => {
 
@@ -52,21 +53,20 @@ const Repository: React.FC = () => {
           console.log('获取数据失败', error)
         }
       )
-    // console.log(reponame);
 
   }, [reponame])
 
   return (
     <>
-      <div className="left">
+      {/* <div className="left">
         <SiderBar />
       </div>
       <div className="right">
-        <Header />
+        <Header /> */}
         <div className='Repository'>
           <Breadcrumb items={[
             {
-              title: <RouteLink to='/'>主页</RouteLink>,
+              title: <RouteLink to='/Content'>主页</RouteLink>,
             },
             {
               title: <RouteLink to={`/Content/${reponame}`}>{reponame}</RouteLink>,
@@ -111,7 +111,7 @@ const Repository: React.FC = () => {
             </tbody>
           </table>
         </div>
-      </div>
+      {/* </div> */}
     </>
   )
 }
@@ -119,9 +119,6 @@ const Repository: React.FC = () => {
 
 // export default Repository
 const mapStateToProps = (state: rootState) => {
-  // sessionStorage.clear()
-  console.log(state.upName.upName.name);
-
   return state
 }
 

@@ -13,6 +13,7 @@ import Repository from './Repository';
 import DirList from './DirList';
 import SiderBar from '../layout/SiderBar';
 import Header from '../layout/Header';
+import token from '../token';
 
 // import { UpNameState } from '../store/reducers/upName';
 
@@ -36,40 +37,39 @@ const Content: React.FC<{ upName: UpNameState }> = (props: { upName: UpNameState
         setPageData(data.slice(start, end))
     }
     useEffect(() => {
-        // console.log(props.upName.upName.name);
-
-        if (sessionStorage.getItem('name') === null) {
+        
+        if (sessionStorage.getItem('name')+'' === '') {
             setName(props.upName.upName.name)
-
+            
         } else {
             setName(sessionStorage.getItem('name') + '')
         }
-        axios({
-            url: `https://api.github.com/users/${name}/repos`,
-            // url: `https://api.github.com/users/PinkYour/repos`, 
-            method: 'GET',
-            headers: { "Authorization": `token ${'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'}` }
-        })
-            .then(response => {
-                console.log(response);
+        if (name==='') {
+            
+        }else{
 
-                setData(response.data)
-                setPageData(response.data.slice(0, 4))
-            }
-            ).catch(error => {
-                // console.log('获取数据失败', error)
-            })
-        // michaelliao
+            axios({
+                url: `https://api.github.com/users/${name}/repos`,
+                method: 'GET',
+                headers: { "Authorization": `token ${token}` }
+            }).then(response => {
+                    setData(response.data)
+                    setPageData(response.data.slice(0, 4))
+                }).catch(error => {
+                    console.log('获取数据失败', error)
+                })
+        }
     }, [name, props])
-    if (name === '' && localStorage.getItem('name') === '') {
+    console.log(name);
+    console.log(localStorage.getItem('name'));
+    
+    // if (name === '' && localStorage.getItem('name') === '') {
+    //     return (
+    //         <WithoutData />
+    //     )
+    // } else {
         return (
-            <WithoutData />
-        )
-    } else {
-        return (
-
             <div className='Content'>
-               
                 {
                     pageData.map((item, index) => {
                         let date = Dayjs(item['created_at']).format()
@@ -101,7 +101,7 @@ const Content: React.FC<{ upName: UpNameState }> = (props: { upName: UpNameState
             </div>
 
         )
-    }
+    // }
 };
 
 //   export default Content

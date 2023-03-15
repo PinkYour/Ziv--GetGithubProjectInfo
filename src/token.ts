@@ -1,0 +1,2 @@
+const token:string='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'
+export default token
