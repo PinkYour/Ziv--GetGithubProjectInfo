@@ -5,6 +5,8 @@ import { Link as RouteLink, useParams } from 'react-router-dom'
 import { FileOutlined, FolderOutlined } from '@ant-design/icons'
 import { Breadcrumb } from 'antd'
 import Link from 'antd/es/typography/Link'
+import Header from '../layout/Header'
+import SiderBar from '../layout/SiderBar'
 
 const DirList: React.FC = () => {
     const { reponame, dirname } = useParams()
@@ -16,7 +18,7 @@ const DirList: React.FC = () => {
         axios({
             url: `https://api.github.com/repos/${sessionStorage.getItem('name')}/${reponame}/contents/${dirname}`,
             method: 'GET',
-            headers: { "Authorization": `token ${'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'}` }
+            headers: { "Authorization": `token ${'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'}` }
         })
             .then(res => {
                 let data = [...res.data];
@@ -40,47 +42,56 @@ const DirList: React.FC = () => {
             })
     }, [])
     return (
-        <div className='DirList'>
-            <Breadcrumb items={[
-                {
-                    title: <RouteLink to='/'>主页</RouteLink>,
-                },
-                {
-                    title: <RouteLink to={`/Repository/${reponame}`}>{reponame}</RouteLink>,
-                },
-                {
-                    title: <RouteLink to={`/Repository/${reponame}/${dirname}`}>{dirname}</RouteLink>,
-                },
-            ]}
-            />
-            <table>
-                <tbody>
-                    <tr>
-                        <th>名称</th>
-                        <td>大小</td>
-                        <td>更新日期</td>
-                    </tr>
-                    {
-                        list.map((item, index) => {
-                            switch (item['type']) {
-                                case 'dir':
-                                    return <tr key={index} className='dir' >
-                                        <th ><Link href={`/Repository/${reponame}/${item['name']}`}> <FolderOutlined />{item['name']}</Link></th>
-                                        <td></td>
-                                        <td>{item['created_at']}</td>
-                                    </tr>;
-                                case 'file':
-                                    return <tr key={index} className='file'>
-                                        <th ><FileOutlined />{item['name'].length > 18 ? item['name'].slice(0, 18) + '...' : item['name']}</th>
-                                        <td>{item['size']}</td>
-                                        <td>{item['created_at']}</td>
-                                    </tr>
+        <>
+            <div className="left">
+                <SiderBar />
+            </div>
+            <div className="right">
+                <Header />
+                <div className='DirList'>
+                    <Breadcrumb items={[
+                        {
+                            title: <RouteLink to='/'>主页</RouteLink>,
+                        },
+                        {
+                            title: <RouteLink to={`/Content/${reponame}`}>{reponame}</RouteLink>,
+                        },
+                        {
+                            title: <RouteLink to={`/Content/${reponame}/${dirname}`}>{dirname}</RouteLink>,
+                        },
+                    ]}
+                    />
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th>名称</th>
+                                <td>大小</td>
+                                <td>更新日期</td>
+                            </tr>
+                            {
+                                list.map((item, index) => {
+                                    switch (item['type']) {
+                                        case 'dir':
+                                            return <tr key={index} className='dir' >
+                                                <th ><Link href={`/${reponame}/${item['name']}`}> <FolderOutlined />{item['name']}</Link></th>
+                                                <td></td>
+                                                <td>{item['created_at']}</td>
+                                            </tr>;
+                                        case 'file':
+                                            return <tr key={index} className='file'>
+                                                <th ><FileOutlined />{item['name'].length > 18 ? item['name'].slice(0, 18) + '...' : item['name']}</th>
+                                                <td>{item['size']}</td>
+                                                <td>{item['created_at']}</td>
+                                            </tr>
+                                    }
+                                })
                             }
-                        })
-                    }
-                </tbody>
-            </table>
-        </div>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </>
+
     )
 }
 

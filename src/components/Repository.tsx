@@ -7,31 +7,23 @@ import { FolderOutlined, FileOutlined } from '@ant-design/icons'
 import Link from 'antd/es/typography/Link'
 import { connect } from 'react-redux'
 import { rootState } from '../store'
-// import { UpNameState } from '../store/reducers/upName'
+import Header from '../layout/Header'
+import SiderBar from '../layout/SiderBar'
 
 
-// https://api.github.com/users/PinkYour
 const Repository: React.FC = () => {
-  // console.log(useParams);
-
   const { reponame } = useParams()
   const [detailData, setDetailData] = useState<any[]>([])
-  // const [upName,setUpName]=useState('')
 
   useEffect(() => {
-    // setUpName(props.upName.upName.name)
 
-    // console.log(reponame);
-    // console.log('sess', sessionStorage.getItem('name'));
     axios({
       url: `https://api.github.com/repos/${sessionStorage.getItem('name')}/${reponame}/contents/`,
       method: 'GET',
-      headers: { "Authorization": `token ${'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'}` }
-  })
+      headers: { "Authorization": `token ${'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'}` }
+    })
       .then(response => {
 
-    // axios.get(`repos/${sessionStorage.getItem('name')}/${reponame}/contents/`).then(
-    //   response => {
         let data = [...response.data];
         let prev: any[] = [];
         let after: any[] = []
@@ -56,64 +48,71 @@ const Repository: React.FC = () => {
         //  let arr:object[] =prev.concat(after)
         setDetailData(prev)
       },
-      error => {
-        console.log('获取数据失败', error)
-      }
-    )
+        error => {
+          console.log('获取数据失败', error)
+        }
+      )
     // console.log(reponame);
 
   }, [reponame])
 
   return (
-    <div className='Repository'>
-      <Breadcrumb items={[
-        {
-          title: <RouteLink to='/'>主页</RouteLink>,
-        },
-        {
-          title: <RouteLink to={`/Repository/${reponame}`}>{reponame}</RouteLink>,
-        },
-      ]}
-      />
-      <br />
+    <>
+      <div className="left">
+        <SiderBar />
+      </div>
+      <div className="right">
+        <Header />
+        <div className='Repository'>
+          <Breadcrumb items={[
+            {
+              title: <RouteLink to='/'>主页</RouteLink>,
+            },
+            {
+              title: <RouteLink to={`/Content/${reponame}`}>{reponame}</RouteLink>,
+            },
+          ]}
+          />
+          <br />
+          <table>
+            <tbody>
+              <tr>
+                <th>名称</th>
+                <td>大小</td>
+                <td>更新日期</td>
+              </tr>
+              {
+                // 
+                detailData.map((item, index) => {
+                  if (item['name'] === '.gitignore') {
+                    return <tr key={index} className='dir'>
+                      <th > <FolderOutlined />{item['name']}</th>
+                      <td></td>
+                      <td>{item['created_at']}</td>
+                    </tr>;
+                  }
+                  switch (item['type']) {
+                    case 'dir':
+                      return <tr key={index} className='dir' >
+                        <th ><Link href={`/Content/${reponame}/${item['name']}`}> <FolderOutlined />{item['name']}</Link></th>
+                        <td></td>
+                        <td>{item['created_at']}</td>
+                      </tr>;
+                    case 'file':
+                      return <tr key={index} className='file'>
+                        <th ><FileOutlined />{item['name'].length > 18 ? item['name'].slice(0, 18) + '...' : item['name']}</th>
+                        <td>{item['size']}</td>
+                        <td>{item['created_at']}</td>
+                      </tr>
 
-      <table>
-        <tbody>
-          <tr>
-            <th>名称</th>
-            <td>大小</td>
-            <td>更新日期</td>
-          </tr>
-          {
-            // 
-            detailData.map((item, index) => {
-              if (item['name'] === '.gitignore') {
-                return <tr key={index} className='dir'>
-                  <th > <FolderOutlined />{item['name']}</th>
-                  <td></td>
-                  <td>{item['created_at']}</td>
-                </tr>;
+                  }
+                })
               }
-              switch (item['type']) {
-                case 'dir':
-                  return <tr key={index} className='dir' >
-                    <th ><Link href={`/Repository/${reponame}/${item['name']}`}> <FolderOutlined />{item['name']}</Link></th>
-                    <td></td>
-                    <td>{item['created_at']}</td>
-                  </tr>;
-                case 'file':
-                  return <tr key={index} className='file'>
-                    <th ><FileOutlined />{item['name'].length > 18 ? item['name'].slice(0, 18) + '...' : item['name']}</th>
-                    <td>{item['size']}</td>
-                    <td>{item['created_at']}</td>
-                  </tr>
-
-              }
-            })
-          }
-        </tbody>
-      </table>
-    </div>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </>
   )
 }
 

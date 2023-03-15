@@ -9,7 +9,7 @@ import { UpNameState } from '../../store/reducers/upName'
 // import Login from '../../pages/Login'
 
 const Index:React.FC<{ upName: UpNameState }>=(props:{ upName: UpNameState })=> {
-  const [avatarurl,setAvatarurl]=useState('')
+  const [avatarurl,setAvatarurl]=useState<string>('')
   const [name,setName]=useState('')
   // const [upName,setUpName]=useState('')
   let upName=''
@@ -35,14 +35,16 @@ const Index:React.FC<{ upName: UpNameState }>=(props:{ upName: UpNameState })=> 
     console.log('11',upName);
     axios({ url: `https://api.github.com/users/${upName}`, 
     method: 'GET', 
-    headers: { "Authorization": `token ${'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'}` } })
+    headers: { "Authorization": `token ${'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'}` } })
     .then(response=>{
     // axios.get(`https://api.github.com/users/${upName}`).then(
     //     response => {
-            console.log('获取数据成功:side',response.data)
-            setAvatarurl(response.data['avatar_url'])
-            setName(response.data['login'])
-            setHomepage(response.data['html_url'])
+            // console.log('获取数据成功:side',response['data'])
+            // let data={...response}
+            // console.log(data.data);
+            // setAvatarurl(data['avatar_url'])
+            // setName(data['login'])
+            // setHomepage(data['html_url'])
           },
           error => {
             console.log('获取数据失败Siderbar',error)
