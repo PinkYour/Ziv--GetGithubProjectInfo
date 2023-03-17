@@ -1,2 +1,2 @@
-const token:string='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'
+const token:string='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'
 export default token

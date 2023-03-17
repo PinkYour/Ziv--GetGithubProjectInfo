@@ -14,9 +14,12 @@
         bottom: 0;
     }
     .right{
-        // width: 100%;
+        // width: 80%;
         flex: 4;
         position: relative;
-        left: 18%;
+        overflow-x: hidden;
+        margin-left: 18%;
+        // margin-top: 100px;
+        // margin-bottom: 20px;
     }
 }

@@ -1,4 +1,4 @@
-import React, {  } from 'react'
+import React, { MutableRefObject, useRef, useState } from 'react'
 import { Dispatch, } from 'redux';
 
 import { useNavigate } from 'react-router-dom';
@@ -14,14 +14,19 @@ interface Props {
 }
 const SearchCom:React.FC<Props>=(props:Props)=>{
   const navigate=useNavigate()
+  // const [serchValue,setSerchValue]=useState('')
+  // const serchValue=useRef()
+  const serchValue: MutableRefObject<any> = useRef(null)
+
   const onSearch = (value: string) => {
-    // console.log(value);
-    // console.log(props);
-    
     props.serchUpName && props.serchUpName(value)
     sessionStorage.setItem('name', value)
     navigate('/Content')
+    // value=''
+    serchValue.current.value=''
+    // console.log(serchValue.current.input);
     
+
   };
   return (
     <div>
@@ -32,6 +37,7 @@ const SearchCom:React.FC<Props>=(props:Props)=>{
             size="large"
             loading={false}
             onSearch={onSearch}
+            ref={serchValue}
             className='serchInput'
           />
     </div>
