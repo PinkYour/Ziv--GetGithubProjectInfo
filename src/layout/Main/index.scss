@@ -7,19 +7,17 @@
     .left{
         width: 18%;
         // flex: 1;
-        position: fixed;
+        position: relative;
         display: inline-block;
+        // height: 750px;
         left: 0;
         top: 0;
         bottom: 0;
     }
     .right{
-        // width: 80%;
+        // width: 100%;
         flex: 4;
         position: relative;
-        overflow-x: hidden;
-        margin-left: 18%;
-        // margin-top: 100px;
-        // margin-bottom: 20px;
+        // left: 18%;
     }
 }

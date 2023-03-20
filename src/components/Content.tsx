@@ -63,11 +63,6 @@ const Content: React.FC<{ upName: UpNameState }> = (props: { upName: UpNameState
     console.log(name);
     console.log(localStorage.getItem('name'));
     
-    // if (name === '' && localStorage.getItem('name') === '') {
-    //     return (
-    //         <WithoutData />
-    //     )
-    // } else {
         return (
             <div className='Content'>
                 {
