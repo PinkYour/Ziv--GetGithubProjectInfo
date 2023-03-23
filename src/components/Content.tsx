@@ -7,12 +7,7 @@ import Dayjs from 'dayjs';
 import { rootState } from '../store';
 import { connect } from 'react-redux';
 import { UpNameState } from '../store/reducers/upName';
-import WithoutData from '../components/WithoutData'
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Repository from './Repository';
-import DirList from './DirList';
-import SiderBar from '../layout/SiderBar';
-import Header from '../layout/Header';
+
 import token from '../token';
 
 // import { UpNameState } from '../store/reducers/upName';
@@ -60,8 +55,8 @@ const Content: React.FC<{ upName: UpNameState }> = (props: { upName: UpNameState
                 })
         }
     }, [name, props])
-    console.log(name);
-    console.log(localStorage.getItem('name'));
+    // console.log(name);
+    // console.log(localStorage.getItem('name'));
     
         return (
             <div className='Content'>

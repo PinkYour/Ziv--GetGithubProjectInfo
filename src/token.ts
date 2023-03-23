@@ -1,2 +1,2 @@
-const token:string='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'
+const token:string='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'
 export default token

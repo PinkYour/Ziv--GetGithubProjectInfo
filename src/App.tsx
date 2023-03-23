@@ -1,18 +1,12 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import './App.scss'
 import Main from './layout/Main'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Repository from './components/Repository'
-import DirList from './components/DirList'
-import Login from './components/Login'
-// import SiderBar from './layout/SiderBar'
-// import Header from './layout/Header'
-import Register from './components/Register'
-import Content from './components/Content'
-// import axios from 'axios'
 
-// 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
-// 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
+import Login from './components/Login'
+
+import Register from './components/Register'
+
 const App: React.FC = () => {
   return (
     <div className='App'>

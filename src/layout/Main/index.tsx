@@ -23,7 +23,9 @@ const Main: React.FC = () => {
     }
 
   }, [])
-  if (sessionStorage.getItem('name') === '') {
+  // if (sessionStorage.getItem('name') === '') {
+  if (sessionStorage.getItem('name')) {
+    console.log(111);
     return (
       <div className='Main'>
         <div className="left">
@@ -31,10 +33,17 @@ const Main: React.FC = () => {
         </div>
         <div className="right">
           <Header />
-          <WithoutData />
+          <Routes>
+            <Route path='/Content' element={<Content />} >
+            </Route>
+            <Route path='/Content/:reponame' element={<Repository />} />
+            <Route path='/Content/:reponame/:dirname' element={<DirList />} />
+          </Routes>
+
         </div>
       </div>
     )
+    
   } else {
     return (
       <div className='Main'>
@@ -43,15 +52,7 @@ const Main: React.FC = () => {
         </div>
         <div className="right">
           <Header />
-
-          <Routes>
-            <Route path='/Content' element={<Content />} >
-
-            </Route>
-            <Route path='/Content/:reponame' element={<Repository />} />
-            <Route path='/Content/:reponame/:dirname' element={<DirList />} />
-          </Routes>
-
+          <WithoutData />
         </div>
       </div>
     )

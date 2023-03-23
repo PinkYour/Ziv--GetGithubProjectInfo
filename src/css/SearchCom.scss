@@ -1,0 +1,27 @@
+.SearchCom{
+    // padding-top: 20px;
+    // padding-left: 40px;
+    position: relative;
+    top: 30px;
+    left: 40px;
+    input{
+        width: 250px;
+        height: 36px;
+        border: 2px solid gray;
+        border-radius: 5px 0 0 5px ;
+        box-sizing: border-box;
+    }
+    button{
+        height: 36px;
+        background-color: #4986ea;
+        width: 70px;
+        color: white;
+        font-size: 16px;
+        border: none;
+        position: relative;
+        top: 3px;
+        cursor: pointer;
+        border-radius:  0 5px 5px 0;
+
+    }
+}
